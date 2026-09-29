@@ -1,0 +1,189 @@
+/* ============ IDSP S Form app ============ */
+:root {
+  --bg: #f1f5f9;
+  --card: #ffffff;
+  --ink: #0f172a;
+  --muted: #64748b;
+  --line: #e2e8f0;
+  --teal: #0f766e;
+  --teal-d: #115e59;
+  --teal-bg: #f0fdfa;
+  --red: #b91c1c;
+  --red-bg: #fef2f2;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: 'Mukta', 'Noto Sans Devanagari', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-tap-highlight-color: transparent;
+}
+.app { min-height: 100vh; padding-bottom: 90px; }
+
+.topbar {
+  position: sticky; top: 0; z-index: 20;
+  background: linear-gradient(135deg, #0f766e, #134e4a);
+  color: #fff; padding: 12px 16px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+.brand { display: flex; align-items: center; gap: 10px; padding-bottom: 10px; }
+.brand-mark {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: #fbbf24; color: #134e4a;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 22px;
+}
+.brand-title { font-weight: 700; font-size: 18px; line-height: 1.1; }
+.brand-sub { font-size: 12px; opacity: .85; }
+.tabs { display: flex; gap: 6px; }
+.tabs button {
+  flex: 1; border: 0; background: transparent;
+  color: #d7efec; padding: 10px; font-size: 15px; font-weight: 600;
+  border-bottom: 3px solid transparent; cursor: pointer;
+  font-family: inherit;
+}
+.tabs button.active { border-bottom-color: #fbbf24; color: #fff; }
+
+main { max-width: 720px; margin: 0 auto; padding: 14px 12px; }
+.card {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 14px; padding: 14px; margin-bottom: 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.card h2 { margin: 0 0 10px; font-size: 16px; color: var(--teal-d); }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.card label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+.card label.full { margin-bottom: 8px; }
+.card input {
+  width: 100%; margin-top: 4px; padding: 9px 10px;
+  border: 1.5px solid var(--line); border-radius: 9px; font-size: 15px;
+  font-family: inherit; color: var(--ink); background: #fff;
+}
+.card input:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(15,118,110,.12); }
+.hint { font-size: 12.5px; color: var(--muted); margin: 6px 0 0; }
+
+.syndrome { border-top: 1px dashed var(--line); padding: 10px 0; }
+.syndrome:first-of-type { border-top: 0; padding-top: 0; }
+.syndrome-name { font-weight: 700; font-size: 14.5px; margin-bottom: 8px; }
+.io-group { background: var(--teal-bg); border-radius: 10px; padding: 8px 10px; margin-bottom: 8px; }
+.io-group.deaths { background: var(--red-bg); }
+.io-title { font-size: 13px; font-weight: 700; color: var(--teal-d); margin-bottom: 6px; }
+.io-group.deaths .io-title { color: var(--red); }
+.io-title b { margin-left: 6px; }
+.io-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.num span { display: block; font-size: 11.5px; color: var(--muted); margin-bottom: 3px; }
+.num input {
+  width: 100%; padding: 8px 6px; text-align: center;
+  border: 1.5px solid var(--line); border-radius: 8px; font-size: 16px;
+  font-family: inherit; background: #fff; color: var(--ink);
+}
+.num input:focus { outline: none; border-color: var(--teal); }
+
+.stickybar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+  display: flex; gap: 10px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(255,255,255,.96); border-top: 1px solid var(--line);
+  backdrop-filter: blur(6px);
+}
+.btn {
+  border: 0; border-radius: 12px; padding: 13px 18px;
+  font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit;
+}
+.btn.primary { background: var(--teal); color: #fff; flex: 1; }
+.btn.primary:active { background: var(--teal-d); }
+.btn.secondary { background: #e2e8f0; color: var(--ink); flex: 1; }
+.btn.small { padding: 8px 12px; font-size: 13.5px; border-radius: 9px; flex: none; }
+.btn.danger { background: var(--red-bg); color: var(--red); border: 1px solid #fecaca; }
+.btn:disabled { opacity: .6; }
+
+.list { display: flex; flex-direction: column; gap: 10px; }
+.report-row {
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+  padding: 12px; display: flex; justify-content: space-between; align-items: center; gap: 8px;
+}
+.report-week { font-weight: 700; font-size: 15px; }
+.report-sub { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+.report-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.empty { text-align: center; padding: 60px 20px; color: var(--muted); }
+.empty p { margin-bottom: 16px; }
+
+.fab {
+  position: fixed; right: 18px; bottom: 24px; z-index: 30;
+  width: 58px; height: 58px; border-radius: 50%; border: 0;
+  background: var(--teal); color: #fff; font-size: 30px; line-height: 1;
+  box-shadow: 0 4px 14px rgba(15,118,110,.4); cursor: pointer;
+}
+.toast {
+  position: fixed; left: 50%; bottom: 90px; transform: translateX(-50%);
+  background: #0f172a; color: #fff; padding: 10px 18px; border-radius: 10px;
+  font-size: 14px; z-index: 50; box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  white-space: nowrap;
+}
+
+/* hidden print area — rendered off-screen for html2canvas */
+.sform-print { position: fixed; left: -10000px; top: 0; }
+
+/* ============ S Form print replica (A4, official look) ============ */
+.sform-page {
+  width: 190mm; background: #fff; color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 2mm 0; font-size: 9pt; line-height: 1.25;
+}
+.sf-head { text-align: center; margin-bottom: 1.5mm; }
+.sf-title { font-size: 15pt; font-weight: 700; }
+.sf-subtitle { font-size: 12.5pt; font-weight: 700; text-decoration: underline; margin-top: 1mm; }
+.sf-note { font-size: 8.5pt; margin-top: 1mm; }
+.sf-rule { border: 0; border-top: 1.5pt solid #000; margin: 1.5mm 0 2mm; }
+
+.sf-meta { display: flex; font-size: 9pt; margin-bottom: 2mm; }
+.sf-meta-item { margin-right: 4mm; white-space: nowrap; }
+.sf-w {
+  display: inline-block; border-bottom: 1px solid #000; text-decoration: none;
+  min-height: 4.5mm; text-align: center; font-weight: 600; padding: 0 1mm;
+}
+
+.sf-info { width: 100%; border-collapse: collapse; margin-bottom: 2mm; }
+.sf-info td { border: 1.2pt solid #000; padding: 1.2mm 2mm; vertical-align: top; }
+.sf-lab { font-size: 8pt; }
+.sf-val { font-size: 10pt; font-weight: 700; min-height: 5mm; margin-top: .5mm; }
+.sf-week { display: flex; align-items: center; }
+.sf-week-lab { font-size: 8.5pt; font-weight: 700; margin-right: 3mm; line-height: 1.3; }
+.sf-week-rows { flex: 1; }
+.sf-week-row { display: flex; align-items: center; margin: 1mm 0; }
+.sf-fromto { font-size: 9pt; font-weight: 700; width: 12mm; }
+.sf-dboxes { display: inline-flex; }
+.sf-dbox {
+  width: 5.2mm; height: 5.2mm; border: 1pt solid #000;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 9pt; font-weight: 700; margin-right: .8mm; background: #fff;
+}
+.sf-dmy { font-size: 7.5pt; color: #000; margin: 0 2.5mm 0 .5mm; }
+
+.sf-grid { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.sf-grid th, .sf-grid td { border: 1pt solid #000; padding: 1mm 1mm; }
+.sf-grid thead th {
+  font-size: 8pt; font-weight: 700; text-align: center; background: #fff;
+}
+.sf-grid thead .sf-age { font-size: 7pt; }
+.sf-vhead { font-size: 8.5pt; }
+.sf-corner { border: 0 !important; }
+.sf-section td {
+  font-weight: 700; font-size: 9.5pt; padding: 1.4mm 2mm;
+  border-top: 2.5pt double #000 !important;
+  border-bottom: 2.5pt double #000 !important;
+}
+.sf-sub td {
+  font-weight: 700; font-size: 9pt; text-align: center; padding: 1mm;
+  border-top: 2pt double #000 !important;
+  border-bottom: 2pt double #000 !important;
+}
+.sf-datarow td { font-size: 8.5pt; }
+.sf-rowlab { padding: 1.2mm 2mm !important; }
+.sf-centered .sf-rowlab { text-align: center; font-weight: 700; }
+.sf-cell { text-align: center; font-weight: 700; font-size: 9.5pt; }
+
+.sf-foot {
+  display: flex; justify-content: space-between; margin-top: 5mm;
+  font-size: 10pt; font-style: italic; font-weight: 700; padding: 0 2mm;
+}
