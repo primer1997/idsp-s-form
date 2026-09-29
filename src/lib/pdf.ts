@@ -8,11 +8,12 @@ export async function exportSFormPdf(filename: string): Promise<'shared' | 'down
   if (!el) throw new Error('Print element not found');
 
   const canvas = await html2canvas(el, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
-  const img = canvas.toDataURL('image/png');
+  // JPEG (not PNG): the form is black-on-white, so this cuts ~10x size with no visible loss
+  const img = canvas.toDataURL('image/jpeg', 0.92);
   const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
   const w = 190;
   const h = (canvas.height / canvas.width) * w;
-  pdf.addImage(img, 'PNG', 10, 10, w, Math.min(h, 277));
+  pdf.addImage(img, 'JPEG', 10, 10, w, Math.min(h, 277));
 
   const blob: Blob = pdf.output('blob');
   const file = new File([blob], filename, { type: 'application/pdf' });
